@@ -5,8 +5,8 @@ This problem provides practice at:
   ***  LOOPS WITHIN LOOPS in SEQUENCES-OF-SUBSEQUENCES problems.  ***
 
 Authors: David Mutchler, Valerie Galluzzi, Mark Hays, Amanda Stouder,
-         their colleagues and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         their colleagues and Jess Thuer.
+"""  # DONE 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 ########################################################################
 # Students:
@@ -38,7 +38,7 @@ def main():
 def run_test_integers():
     """ Tests the    integers    function. """
     # ------------------------------------------------------------------
-    # TODO: 2. Implement this TEST function.
+    # DONE 2. Implement this TEST function.
     #   It TESTS the  integers  function defined below.
     #   Include at least ** 1 ** ADDITIONAL test beyond those we wrote.
     #
@@ -71,6 +71,20 @@ def run_test_integers():
     print('Expected is:', expected)
     print('Actual is:  ', answer)
 
+    # Test 2:
+    expected = [1, 2, -5, 16, 4, 0, -4, 9]
+    answer = integers([('once', 1),
+                       ('upon', 2, -5),
+                       [16, 'a', 'time', 4],
+                       'monday',
+                       [0],
+                       [-4, 'okay'],
+                       [[], []],
+                       [9, 'twenty-five']
+                       ])
+    print('Expected is:', expected)
+    print('Actual is:  ', answer)
+
 
 def integers(sequence_of_sequences):
     """
@@ -95,7 +109,7 @@ def integers(sequence_of_sequences):
       :rtype: list of int
     """
     # ------------------------------------------------------------------
-    # TODO: 3. Implement and test this function.
+    # DONE 3. Implement and test this function.
     #   Note that you should write its TEST function first (above).
     # ------------------------------------------------------------------
     ####################################################################
@@ -119,11 +133,20 @@ def integers(sequence_of_sequences):
     #    TIME ESTIMATE:  10 minutes.
     # ------------------------------------------------------------------
 
+    new_list = []
+
+    for k in range(len(sequence_of_sequences)):
+        seq = sequence_of_sequences[k]
+        for j in range(len(seq)):
+            obj = seq[j]
+            if type(obj) is int:
+                new_list = new_list + [obj]
+    return new_list
 
 def run_test_big_letters():
     """ Tests the    big_letters    function. """
     # ------------------------------------------------------------------
-    # TODO: 4. Implement this TEST function.
+    # DONE 4. Implement this TEST function.
     #   It TESTS the  big_letters  function defined below.
     #   Include at least ** 1 ** ADDITIONAL test beyond those we wrote.
     # ------------------------------------------------------------------
@@ -159,6 +182,29 @@ def run_test_big_letters():
     print('Expected is:', expected)
     print('Actual is:  ', answer)
 
+    # Test 2:
+    expected = 'HOCUSPOCUSHALLOWEEN'
+    answer = big_letters([(5, 7, 9),  # not a string
+                          'How are yOu today?',  # HO
+                          ('a', 14, 'aaa'),  # not a string
+                          [4],  # not a string
+                          ['does this work?'],  # not a string
+                          'Cool beans',  #C
+                          ['Cool beans'],  # not a string
+                          'Under the Sea',  # US
+                          'Practically perfect in every way',  # P
+                          'OnCe Upon a time',  # OCU
+                          'b',  #
+                          'a dream is a wiSh your heart makes',  # S
+                          'H',  # H
+                          'ALL'  # ALL
+                          'Only With tomato plEasE',  # OWEE
+                          'this test is very long'  #
+                          'goodNight',  # N
+                          ])
+    print('Expected is:', expected)
+    print('Actual is:  ', answer)
+
 
 def big_letters(sequence_of_sequences):
     """
@@ -189,7 +235,7 @@ def big_letters(sequence_of_sequences):
     Precondition:  the given argument is a sequence of sequences.
     """
     # ------------------------------------------------------------------
-    # TODO: 5. Implement and test this function.
+    # DONE 5. Implement and test this function.
     #   Note that you should write its TEST function first (above).
     # ------------------------------------------------------------------
     ####################################################################
@@ -211,6 +257,17 @@ def big_letters(sequence_of_sequences):
     #    DIFFICULTY:      7
     #    TIME ESTIMATE:  12 minutes.
     # ------------------------------------------------------------------
+
+    new_string = ''
+
+    for k in range(len(sequence_of_sequences)):
+        seq = sequence_of_sequences[k]
+        if type(seq) is str:
+            for j in range(len(seq)):
+                obj = seq[j]
+                if obj.isupper():
+                    new_string = new_string + str(obj)
+    return new_string
 
 # ----------------------------------------------------------------------
 # Calls  main  to start the ball rolling.
