@@ -89,12 +89,15 @@ def shape(r):
     # ------------------------------------------------------------------
 
     for k in range(r):
-        print(' '*k, end='')
-        print('+'*(r-k), end='')
+        for _ in range(k):
+            print(' ', end='')
+        for _ in range(r-k):
+            print('+', end='')
         print('!', end='')
         for j in range(r-k, 0, -1):
             print(j, end='')
-        print('-'*k, end='')
+        for _ in range(k):
+            print('-', end='')
         print()
 
 # ----------------------------------------------------------------------
