@@ -5,8 +5,8 @@ This problem provides practice at:
   ***  LOOPS WITHIN LOOPS in 2D GRAPHICS problems.  ***
 
 Authors: David Mutchler, Valerie Galluzzi, Mark Hays, Amanda Stouder,
-         their colleagues and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         their colleagues and Jess Thuer.
+"""  # DONE 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 ########################################################################
 # Students:
@@ -34,7 +34,7 @@ import rosegraphics as rg
 def main():
     """ Calls the   TEST   functions in this module. """
     run_test_hourglass()
-    run_test_many_hourglasses()
+    # run_test_many_hourglasses()
 
 
 def run_test_hourglass():
@@ -89,7 +89,7 @@ def hourglass(window, n, point, radius, color):
     a color that rosegraphics understands.
     """
     # ------------------------------------------------------------------
-    # TODO: 2. Implement and test this function.
+    # DONE 2. Implement and test this function.
     #       We provided some tests for you (above).
     # ------------------------------------------------------------------
     ####################################################################
@@ -101,6 +101,56 @@ def hourglass(window, n, point, radius, color):
     #    DIFFICULTY:      8
     #    TIME ESTIMATE:  25 minutes (warning: this problem is challenging)
     # ------------------------------------------------------------------
+
+    cx = point.x
+    cy = point.y
+    import math
+    dy = math.sqrt((2*radius)**2 - (radius)**2)
+    circle = rg.Circle(point, radius)
+    circle.fill_color = color
+    circle.attach_to(window)
+
+    lp1 = rg.Point(cx-radius, cy)
+    lp2 = rg.Point(cx+radius, cy)
+    line = rg.Line(lp1, lp2)
+    line.attach_to(window)
+
+    px = cx - radius
+
+    for k in range(1, n):
+        py = cy - dy*k
+        hourglass_half(px, py, radius, window, color, k)
+        px = cx - (radius*k) - radius
+
+    px = cx - radius
+
+    for k in range(1, n):
+        py = cy + dy*(k)
+        hourglass_half(px, py, radius, window, color, k)
+        px = cx - (radius*k) - radius
+
+    window.render()
+
+# definitions that are called from within the hourglass definiton
+def hourglass_half(px, py, radius, window, color, k):
+    for j in range(k + 1):
+        draw_circle(px, py, radius, window, color)
+        draw_line(px, py, radius, window)
+        px = px + (radius * 2)
+def draw_circle(x, y, radius, window, color):
+    point = rg.Point(x, y)
+    circle = rg.Circle(point, radius)
+    circle.fill_color = color
+    circle.attach_to(window)
+def draw_line(x, y, radius, window):
+    lp1 = rg.Point(x + radius, y)
+    lp2 = rg.Point(x - radius, y)
+    line = rg.Line(lp1, lp2)
+    line.attach_to(window)
+
+
+
+
 
 
 def run_test_many_hourglasses():
