@@ -33,7 +33,7 @@ import rosegraphics as rg
 
 def main():
     """ Calls the   TEST   functions in this module. """
-    # run_test_hourglass()
+    run_test_hourglass()
     run_test_many_hourglasses()
 
 
